@@ -1,4 +1,7 @@
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
+ 
 
 export default function TabOneScreen() {
   return (
@@ -8,6 +11,9 @@ export default function TabOneScreen() {
       <Text className="text-center text-gray-600 mx-12">
         Bienvenue sur Moodly ! Votre app pour suivre votre humeur.
       </Text>
+      <Button className="mt-8 ">
+      <Text>Je suis un Bouton c'est fou</Text>
+      </Button>
     </View>
   );
 }
