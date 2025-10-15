@@ -52,13 +52,18 @@ function useProtectedRoute(user: any, isLoading: boolean) {
     if (isLoading) return;
 
     const inAuthGroup = segments[0] === '(tabs)';
+    const inAdminPage = segments[0] === 'admin';
 
-    if (!user && inAuthGroup) {
+    if (!user && (inAuthGroup || inAdminPage)) {
       // Rediriger vers login si pas authentifié
       router.replace('/login' as any);
-    } else if (user && !inAuthGroup) {
-      // Rediriger vers l'app si déjà authentifié
-      router.replace('/(tabs)');
+    } else if (user && !inAuthGroup && !inAdminPage) {
+      // Rediriger selon le rôle de l'utilisateur
+      if (user.isManager) {
+        router.replace('/admin' as any);
+      } else {
+        router.replace('/(tabs)');
+      }
     }
   }, [user, segments, isLoading]);
 }
@@ -76,6 +81,7 @@ function RootLayoutNav() {
     <Stack>
       <Stack.Screen name="login" options={{ headerShown: false }} />
       <Stack.Screen name="register" options={{ headerShown: false }} />
+      <Stack.Screen name="admin" options={{ headerShown: false }} />
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
     </Stack>
   );

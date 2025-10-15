@@ -47,7 +47,13 @@ export default function RegisterScreen() {
         Alert.alert('Succès', 'Compte créé avec succès !', [
           {
             text: 'OK',
-            onPress: () => router.replace('/(tabs)'),
+            onPress: () => {
+              if (data.user.isManager) {
+                router.replace('/admin' as any);
+              } else {
+                router.replace('/(tabs)');
+              }
+            },
           },
         ]);
       } else {

@@ -42,8 +42,12 @@ export default function LoginScreen() {
         // Mettre à jour le contexte
         setAuthData(data.jwt, data.user);
         
-        // Rediriger vers l'app
-        router.replace('/(tabs)');
+        // Rediriger selon le rôle
+        if (data.user.isManager) {
+          router.replace('/admin' as any);
+        } else {
+          router.replace('/(tabs)');
+        }
       } else {
         Alert.alert('Erreur', data.error?.message || 'Identifiants incorrects');
       }

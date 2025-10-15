@@ -68,6 +68,10 @@
     },
     "Mood": {
       "type": "string"
+    },
+    "isManager": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

@@ -12,7 +12,8 @@ interface User {
   createdAt: string;
   updatedAt: string;
   publishedAt: string;
-  Mood: any;
+  Mood: string;
+  isManager?: boolean;
 }
 
 interface AuthContextType {
