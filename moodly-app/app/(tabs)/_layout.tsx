@@ -12,21 +12,21 @@ function TabBarIcon(props: {
 }
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
+  // Use dark navbar to match background
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: '#007AFF',
-        tabBarInactiveTintColor: '#8E8E93',
+        tabBarActiveTintColor: '#FFFFFF',
+        tabBarInactiveTintColor: '#B0B0B0',
         headerShown: false,
         tabBarStyle: {
-          backgroundColor: colorScheme === 'dark' ? '#1C1C1E' : '#F2F2F7',
+          backgroundColor: '#353535',
+          borderTopColor: 'transparent',
         },
         headerStyle: {
-          backgroundColor: colorScheme === 'dark' ? '#1C1C1E' : '#F2F2F7',
+          backgroundColor: '#353535',
         },
-        headerTintColor: colorScheme === 'dark' ? '#FFFFFF' : '#000000',
+        headerTintColor: '#FFFFFF',
       }}>
       <Tabs.Screen
         name="index"

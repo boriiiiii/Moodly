@@ -16,6 +16,10 @@ const MOODS = [
   { value: 'stressed', label: 'Stressé 😰', color: '#9C27B0' },
   { value: 'calm', label: 'Calme 😌', color: '#00BCD4' },
 ];
+import { View } from 'react-native';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
+ 
 
 export default function TabOneScreen() {
   const { user, logout, jwt } = useAuth();
