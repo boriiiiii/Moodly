@@ -430,12 +430,12 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiUtilisateurUtilisateur extends Struct.CollectionTypeSchema {
-  collectionName: 'utilisateurs';
+export interface ApiMoodMood extends Struct.CollectionTypeSchema {
+  collectionName: 'moods';
   info: {
-    displayName: 'Utilisateur';
-    pluralName: 'utilisateurs';
-    singularName: 'utilisateur';
+    displayName: 'Mood';
+    pluralName: 'moods';
+    singularName: 'mood';
   };
   options: {
     draftAndPublish: true;
@@ -445,18 +445,14 @@ export interface ApiUtilisateurUtilisateur extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::utilisateur.utilisateur'
-    > &
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::mood.mood'> &
       Schema.Attribute.Private;
     Mood: Schema.Attribute.String;
-    Nom: Schema.Attribute.String;
-    Prenom: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    User: Schema.Attribute.String;
   };
 }
 
@@ -915,7 +911,6 @@ export interface PluginUsersPermissionsUser
   };
   options: {
     draftAndPublish: false;
-    timestamps: true;
   };
   attributes: {
     blocked: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
@@ -929,12 +924,14 @@ export interface PluginUsersPermissionsUser
       Schema.Attribute.SetMinMaxLength<{
         minLength: 6;
       }>;
+    isManager: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'plugin::users-permissions.user'
     > &
       Schema.Attribute.Private;
+    Mood: Schema.Attribute.String;
     password: Schema.Attribute.Password &
       Schema.Attribute.Private &
       Schema.Attribute.SetMinMaxLength<{
@@ -970,7 +967,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
-      'api::utilisateur.utilisateur': ApiUtilisateurUtilisateur;
+      'api::mood.mood': ApiMoodMood;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

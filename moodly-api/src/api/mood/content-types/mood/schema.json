@@ -1,20 +1,17 @@
 {
   "kind": "collectionType",
-  "collectionName": "utilisateurs",
+  "collectionName": "moods",
   "info": {
-    "singularName": "utilisateur",
-    "pluralName": "utilisateurs",
-    "displayName": "Utilisateur"
+    "singularName": "mood",
+    "pluralName": "moods",
+    "displayName": "Mood"
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "Prenom": {
-      "type": "string"
-    },
-    "Nom": {
+    "User": {
       "type": "string"
     },
     "Mood": {
