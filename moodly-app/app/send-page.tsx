@@ -1,11 +1,10 @@
 import { View, TouchableWithoutFeedback, Keyboard } from 'react-native';
-import { Stack, useLocalSearchParams } from 'expo-router';
-import { Text } from '@/components/ui/text';
-import { Button } from '@/components/ui/button';
+import { Stack, useLocalSearchParams, router } from 'expo-router';
 import { FlowerMood } from '@/components/custom/FlowerMood';
+import { MoodButton } from '@/components/custom/MoodButton';
+import { Input } from "@/components/ui/input";
 import type { Emotions } from '@/types/emotions';
-import { Input } from "@/components/ui/input"
-import { getFlowerColor } from '@/lib/flowerColors';
+
 
 
 
@@ -41,12 +40,17 @@ export default function SummaryScreen() {
                 multiline
               />
               
-              <Button 
-                className="rounded-xl w-36 self-center "
-                style={{ backgroundColor: getFlowerColor(percentage) }}
-              >
-                <Text className='text-black'>Envoyer</Text>
-              </Button>
+              <MoodButton 
+                percentage={percentage}
+                label="Envoyer"
+                className="w-36 self-center"
+                onPress={() => router.push({
+                  pathname: '/thanks-page',
+                  params: {
+                    percentage: percentage.toString(),
+                  }
+                })}
+              />
             </View>
           </View>
           

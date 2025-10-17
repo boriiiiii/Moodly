@@ -7,10 +7,9 @@ import Animated, {
   runOnJS,
 } from 'react-native-reanimated';
 import { Text } from '@/components/ui/text';
-import { Button } from '@/components/ui/button';
 import { EmotionToggle } from '@/components/custom/EmotionToggle';
 import { FlowerMood } from '@/components/custom/FlowerMood';
-import { getFlowerColor } from '@/lib/flowerColors';
+import { MoodButton } from '@/components/custom/MoodButton';
 import type { Emotions } from '@/types/emotions';
 
 
@@ -33,7 +32,7 @@ export default function TabTwoScreen() {
   const INITIAL_SCROLL = SCROLL_RANGE / 2; // Start at 50%
 
   // Initialize scroll position to 50% after layout is ready
-  const handleLayout = () => {
+  const handleLayout = (): void => {
     if (!isLayoutReady) {
       setIsLayoutReady(true);
       // Scroll to initial position immediately after layout
@@ -73,9 +72,9 @@ export default function TabTwoScreen() {
         
       </View>
       <View className='mt-2 flex-row gap-3 mr-10 justify-end'> 
-        <Button 
-          className='rounded-xl'
-          style={{ backgroundColor: getFlowerColor(percentage) }}
+        <MoodButton 
+          percentage={percentage}
+          label="Suivant"
           onPress={() => router.push({
             pathname: '/send-page',
             params: { 
@@ -83,9 +82,7 @@ export default function TabTwoScreen() {
               emotions: JSON.stringify(emotions)
             }
           })}
-        >
-          <Text className='text-black'>Suivant</Text> 
-        </Button>
+        />
       </View>
       <View>
         <Text className='text-white ml-5'>Tes ressentis</Text>

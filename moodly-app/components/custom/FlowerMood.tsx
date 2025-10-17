@@ -2,7 +2,7 @@ import { View, Image } from 'react-native';
 import type { FlowerMoodProps, FlowerPosition } from '@/types/flower';
 
 
-const getFlowerImage = (percent: number) => {
+const getFlowerImage = (percent: number): number => {
   if (percent >= 100) return require('@/assets/images/flower-7.png');
   if (percent >= 85) return require('@/assets/images/flower-6.png');
   if (percent >= 70) return require('@/assets/images/flower-5.png');
@@ -12,13 +12,13 @@ const getFlowerImage = (percent: number) => {
   return require('@/assets/images/flower-1.png');
 };
 
-/**
- * Retourne les classes Tailwind pour le positionnement selon la position choisie
- */
+
 const getPositionClasses = (position: FlowerPosition): string => {
   switch (position) {
     case 'top-right':
       return 'absolute -top-[170px] -right-[170px] z-0';
+    case 'middle' : 
+        return 'absolute bottom-[49px] left-1/2 -translate-x-1/2 z-0';
     case 'bottom-right':
     default:
       return 'absolute -bottom-[150px] -right-[140px] z-0';
