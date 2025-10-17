@@ -129,7 +129,7 @@ export default function AdminScreen() {
                   {getMoodEmoji(item.Mood)} {item.Mood}
                 </Text>
                 <Text style={{ color: '#666', marginBottom: 5 }}>
-                  Utilisateur: {item.User}
+                  ID: {item.documentId}
                 </Text>
                 <Text style={{ color: '#999', fontSize: 12 }}>
                   {new Date(item.createdAt).toLocaleString('fr-FR')}
