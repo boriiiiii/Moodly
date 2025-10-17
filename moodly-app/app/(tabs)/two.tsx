@@ -1,20 +1,33 @@
-import { Text, View, Image } from 'react-native';
-import { useState, useRef, useEffect } from 'react';
+import { View } from 'react-native';
+import { useState, useRef } from 'react';
 import Animated, {
   useAnimatedScrollHandler,
   useSharedValue,
   runOnJS,
 } from 'react-native-reanimated';
+import { Text } from '@/components/ui/text';
+import { Button } from '@/components/ui/button';
+import { EmotionToggle } from '@/components/custom/EmotionToggle';
+import { FlowerMood } from '@/components/custom/FlowerMood';
+import type { Emotions } from '@/types/emotions';
+
 
 export default function TabTwoScreen() {
   const scrollY = useSharedValue(0);
-  const [percentage, setPercentage] = useState(50);
+  const [percentage, setPercentage] = useState<number>(50);
   const scrollViewRef = useRef<Animated.ScrollView>(null);
-  const [isLayoutReady, setIsLayoutReady] = useState(false);
+  const [isLayoutReady, setIsLayoutReady] = useState<boolean>(false);
+  
+  const [emotions, setEmotions] = useState<Emotions>({
+    colere: false,
+    Inquiétude: false,
+    tristesse: false,
+    peur: false,
+    anxiete: false,
+    frustration: false,
+  });
 
-  // Total scroll range 
-  // Lower value = more sensitive (less scrolling needed)
-  const SCROLL_RANGE = 400; // pixels to scroll from 0% to 100%
+  const SCROLL_RANGE = 400; // pixels to scroll from 0% to 100% (lower value = more sensitive)
   const INITIAL_SCROLL = SCROLL_RANGE / 2; // Start at 50%
 
   // Initialize scroll position to 50% after layout is ready
@@ -31,25 +44,12 @@ export default function TabTwoScreen() {
     }
   };
 
-  
-  const getFlowerImage = (percent: number) => {
-    if (percent >= 100) return require('@/assets/images/flower-7.png');
-    if (percent >= 85) return require('@/assets/images/flower-6.png');
-    if (percent >= 70) return require('@/assets/images/flower-5.png');
-    if (percent >= 50) return require('@/assets/images/flower-4.png');
-    if (percent >= 30) return require('@/assets/images/flower-3.png');
-    if (percent >= 15) return require('@/assets/images/flower-2.png');
-    return require('@/assets/images/flower-1.png');
-  };
-
   const scrollHandler = useAnimatedScrollHandler({
     onScroll: (event) => {
       const scrollPosition = event.contentOffset.y;
       scrollY.value = scrollPosition;
       
       // Calculate percentage based on scroll position
-      // When scrollPosition = 0, we're at the top padding (0%)
-      // When scrollPosition = SCROLL_RANGE, we're at 100%
       const percent = Math.round((scrollPosition / SCROLL_RANGE) * 100);
       const clampedPercent = Math.max(0, Math.min(100, percent));
       
@@ -59,7 +59,64 @@ export default function TabTwoScreen() {
   });
 
   return (
-  <View style={{ flex: 1, backgroundColor: '#353535' }}>
+    <View className="flex-1 bg-[#353535]">
+      <View className="mt-16 ml-5">
+        <Text className="text-xl text-white">
+          Salut <Text className="text-xl font-bold text-white">Alphonse</Text> !
+        </Text>
+        <Text className="text-lg text-white">
+          Nous sommes le <Text className="font-bold text-white">mardi 14 octobre</Text>{'\n'}
+          Quelle est ton humeur aujourd'hui ?
+        </Text>
+        
+      </View>
+      <View className='mt-2 flex-row gap-3 mr-10 justify-end'> 
+        <Button className='rounded-xl'>
+          <Text>Suivant</Text> 
+        </Button>
+      </View>
+      <View>
+        <Text className='text-white ml-5'>Tes ressentis</Text>
+      </View>
+      <View className='mt-2 flex-row flex-wrap gap-3 ml-5 mr-5'>
+        <EmotionToggle 
+          label="Colère"
+          isPressed={emotions.colere}
+          onPress={() => setEmotions({...emotions, colere: !emotions.colere})}
+        />
+        
+        <EmotionToggle 
+          label="Inquiétude"
+          isPressed={emotions.Inquiétude}
+          onPress={() => setEmotions({...emotions, Inquiétude: !emotions.Inquiétude})}
+        />
+        
+        <EmotionToggle 
+          label="Tristesse"
+          isPressed={emotions.tristesse}
+          onPress={() => setEmotions({...emotions, tristesse: !emotions.tristesse})}
+        />
+        
+        <EmotionToggle 
+          label="Peur"
+          isPressed={emotions.peur}
+          onPress={() => setEmotions({...emotions, peur: !emotions.peur})}
+        />
+        
+        <EmotionToggle 
+          label="Anxiété"
+          isPressed={emotions.anxiete}
+          onPress={() => setEmotions({...emotions, anxiete: !emotions.anxiete})}
+        />
+        
+        <EmotionToggle 
+          label="Frustration"
+          isPressed={emotions.frustration}
+          onPress={() => setEmotions({...emotions, frustration: !emotions.frustration})}
+        />
+      </View>
+
+
       <Animated.ScrollView
         ref={scrollViewRef}
         onScroll={scrollHandler}
@@ -67,37 +124,23 @@ export default function TabTwoScreen() {
         scrollEventThrottle={16} // ~60fps
         showsVerticalScrollIndicator={false} // hide scrollbar
         bounces={false} // Disable bounce effect
-        overScrollMode="never" // Disable overscroll for Android
+        className="flex-1"
       >
         {/* Top spacer - scroll down to decrease percentage */}
         <View style={{ height: SCROLL_RANGE }} />
-        
-        {/* Middle marker with color sections to visualize scroll range */}
-        <View style={{ height: SCROLL_RANGE }}>
-         
-        </View>
-        
+        {/* Middle marker */}
+        <View style={{ height: SCROLL_RANGE }} />
         {/* Bottom spacer - scroll up to increase percentage */}
         <View style={{ height: SCROLL_RANGE }} />
       </Animated.ScrollView>
 
-    <View className="absolute inset-0 justify-center ml-5  pointer-events-none z-10">
+      <View className="absolute inset-0 justify-center ml-5 mt-14 pointer-events-none z-10">
         <Text className="text-9xl font-bold text-white">
           {percentage}%
         </Text>
       </View>
 
-      <View
-        // image container placed behind content
-        style={{ position: 'absolute', bottom: -120, right: -140, zIndex: 0 }}
-        pointerEvents="none"
-      >
-        <Image
-          source={getFlowerImage(percentage)}
-          style={{ width: 550, height: 550 }}
-          resizeMode="contain"
-        />
-      </View>
+      <FlowerMood percentage={percentage} />
     </View>
   );
 }
