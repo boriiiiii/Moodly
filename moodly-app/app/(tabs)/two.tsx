@@ -1,5 +1,6 @@
 import { View } from 'react-native';
 import { useState, useRef } from 'react';
+import { router } from 'expo-router';
 import Animated, {
   useAnimatedScrollHandler,
   useSharedValue,
@@ -9,6 +10,7 @@ import { Text } from '@/components/ui/text';
 import { Button } from '@/components/ui/button';
 import { EmotionToggle } from '@/components/custom/EmotionToggle';
 import { FlowerMood } from '@/components/custom/FlowerMood';
+import { getFlowerColor } from '@/lib/flowerColors';
 import type { Emotions } from '@/types/emotions';
 
 
@@ -71,8 +73,18 @@ export default function TabTwoScreen() {
         
       </View>
       <View className='mt-2 flex-row gap-3 mr-10 justify-end'> 
-        <Button className='rounded-xl'>
-          <Text>Suivant</Text> 
+        <Button 
+          className='rounded-xl'
+          style={{ backgroundColor: getFlowerColor(percentage) }}
+          onPress={() => router.push({
+            pathname: '/send-page',
+            params: { 
+              percentage: percentage.toString(),
+              emotions: JSON.stringify(emotions)
+            }
+          })}
+        >
+          <Text className='text-black'>Suivant</Text> 
         </Button>
       </View>
       <View>

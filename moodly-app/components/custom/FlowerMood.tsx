@@ -1,5 +1,5 @@
 import { View, Image } from 'react-native';
-import type { FlowerMoodProps } from '@/types/flower';
+import type { FlowerMoodProps, FlowerPosition } from '@/types/flower';
 
 
 const getFlowerImage = (percent: number) => {
@@ -12,16 +12,33 @@ const getFlowerImage = (percent: number) => {
   return require('@/assets/images/flower-1.png');
 };
 
+/**
+ * Retourne les classes Tailwind pour le positionnement selon la position choisie
+ */
+const getPositionClasses = (position: FlowerPosition): string => {
+  switch (position) {
+    case 'top-right':
+      return 'absolute -top-[170px] -right-[170px] z-0';
+    case 'bottom-right':
+    default:
+      return 'absolute -bottom-[150px] -right-[140px] z-0';
+  }
+};
 
-export function FlowerMood({ percentage }: FlowerMoodProps) {
+
+export function FlowerMood({ 
+  percentage, 
+  position = 'bottom-right',
+  size = 550 
+}: FlowerMoodProps) {
   return (
     <View 
-      className="absolute -bottom-[150px] -right-[140px] z-0"
+      className={getPositionClasses(position)}
       pointerEvents="none"
     >
       <Image
         source={getFlowerImage(percentage)}
-        style={{ width: 550, height: 550 }}
+        style={{ width: size, height: size }}
         resizeMode="contain"
       />
     </View>
