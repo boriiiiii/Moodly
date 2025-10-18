@@ -2,15 +2,10 @@ import { FlowerMood } from '@/components/custom/FlowerMood';
 import { Text } from '@/components/ui/text';
 import { Stack, useLocalSearchParams } from 'expo-router';
 import { View } from 'react-native';
-import type { Emotions } from '@/types/emotions';
-
-
 
 export default function ThanksPage() {
     const params = useLocalSearchParams<{ percentage: string }>();
     const percentage = params.percentage ? parseInt(params.percentage, 10) : 50;
-
-
 
     return (
         <>

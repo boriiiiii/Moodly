@@ -3,27 +3,11 @@ import { Stack, useLocalSearchParams, router } from 'expo-router';
 import { FlowerMood } from '@/components/custom/FlowerMood';
 import { MoodButton } from '@/components/custom/MoodButton';
 import { Input } from "@/components/ui/input";
-import type { Emotions } from '@/types/emotions';
-
-
 
 
 export default function SummaryScreen() {
   const params = useLocalSearchParams<{ percentage: string; emotions: string }>();
-  
   const percentage = params.percentage ? parseInt(params.percentage, 10) : 50;
-  const emotions: Emotions = params.emotions 
-    ? JSON.parse(params.emotions) 
-    : {
-        colere: false,
-        Inquiétude: false,
-        tristesse: false,
-        peur: false,
-        anxiete: false,
-        frustration: false,
-      };
-
-
 
   return (
     <>
@@ -34,8 +18,7 @@ export default function SummaryScreen() {
             <View className="p-5 z-20 h-36 ">
               <Input 
                 placeholder="Quelque chose à ajouter ?"
-                placeholderTextColor="#B7B7B7"
-                className="bg-[#707070] text-[#B7B7B7] mb-4 h-96 rounded-2xl w-80 border-0 pt-3"
+                className="bg-[#707070] text-[#B7B7B7] placeholder:text-[#B7B7B7] mb-4 h-96 rounded-2xl w-80 border-0 pt-3"
                 textAlignVertical="top"
                 multiline
               />

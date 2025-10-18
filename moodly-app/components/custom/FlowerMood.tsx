@@ -1,7 +1,6 @@
 import { View, Image } from 'react-native';
 import type { FlowerMoodProps, FlowerPosition } from '@/types/flower';
 
-
 const getFlowerImage = (percent: number): number => {
   if (percent >= 100) return require('@/assets/images/flower-7.png');
   if (percent >= 85) return require('@/assets/images/flower-6.png');
@@ -11,7 +10,6 @@ const getFlowerImage = (percent: number): number => {
   if (percent >= 15) return require('@/assets/images/flower-2.png');
   return require('@/assets/images/flower-1.png');
 };
-
 
 const getPositionClasses = (position: FlowerPosition): string => {
   switch (position) {
@@ -24,7 +22,6 @@ const getPositionClasses = (position: FlowerPosition): string => {
       return 'absolute -bottom-[150px] -right-[140px] z-0';
   }
 };
-
 
 export function FlowerMood({ 
   percentage, 

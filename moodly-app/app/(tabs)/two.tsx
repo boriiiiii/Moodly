@@ -1,17 +1,12 @@
 import { View } from 'react-native';
 import { useState, useRef } from 'react';
 import { router } from 'expo-router';
-import Animated, {
-  useAnimatedScrollHandler,
-  useSharedValue,
-  runOnJS,
-} from 'react-native-reanimated';
+import Animated, {useAnimatedScrollHandler,useSharedValue,runOnJS,} from 'react-native-reanimated';
 import { Text } from '@/components/ui/text';
 import { EmotionToggle } from '@/components/custom/EmotionToggle';
 import { FlowerMood } from '@/components/custom/FlowerMood';
 import { MoodButton } from '@/components/custom/MoodButton';
 import type { Emotions } from '@/types/emotions';
-
 
 export default function TabTwoScreen() {
   const scrollY = useSharedValue(0);
@@ -69,7 +64,6 @@ export default function TabTwoScreen() {
           Nous sommes le <Text className="font-bold text-white">mardi 14 octobre</Text>{'\n'}
           Quelle est ton humeur aujourd'hui ?
         </Text>
-        
       </View>
       <View className='mt-2 flex-row gap-3 mr-10 justify-end'> 
         <MoodButton 
@@ -124,7 +118,6 @@ export default function TabTwoScreen() {
           onPress={() => setEmotions({...emotions, frustration: !emotions.frustration})}
         />
       </View>
-
 
       <Animated.ScrollView
         ref={scrollViewRef}

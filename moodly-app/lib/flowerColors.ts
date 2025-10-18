@@ -1,4 +1,4 @@
-/** Return the color associate to the flower */
+/** Return the color associate to the flower for the color of the button */
 export const getFlowerColor = (percent: number): string => {
   if (percent >= 100) return '#1CFF49'; 
   if (percent >= 85) return '#FFEC1C';  

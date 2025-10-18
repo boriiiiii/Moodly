@@ -3,7 +3,6 @@ import { Text } from '@/components/ui/text';
 import { getFlowerColor } from '@/lib/flowerColors';
 import type { MoodButtonProps } from '@/types/button';
 
-
 export function MoodButton({ 
   percentage, 
   label, 
