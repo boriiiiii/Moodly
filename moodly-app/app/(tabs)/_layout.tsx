@@ -28,20 +28,6 @@ export default function TabLayout() {
         },
         headerTintColor: '#FFFFFF',
       }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Humeur',
-          tabBarIcon: ({ color }) => <TabBarIcon name="heart" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="two"
-        options={{
-          title: 'Statistiques',
-          tabBarIcon: ({ color }) => <TabBarIcon name="bar-chart" color={color} />,
-        }}
-      />
     </Tabs>
   );
 }

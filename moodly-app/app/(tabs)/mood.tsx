@@ -13,7 +13,6 @@ export default function TabTwoScreen() {
   const [percentage, setPercentage] = useState<number>(50);
   const scrollViewRef = useRef<Animated.ScrollView>(null);
   const [isLayoutReady, setIsLayoutReady] = useState<boolean>(false);
-  
   const [emotions, setEmotions] = useState<Emotions>({
     colere: false,
     Inquiétude: false,
